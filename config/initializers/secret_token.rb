@@ -9,4 +9,19 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Progress::Application.config.secret_key_base = '3bad9e34107b3d7e6ede316132ef4cce8bc40cd9a197d5a2f805cc9bd856163736b6e083c61ca73966c8fb1b73cf2d41925a5197e14e6fbe0293e0710a515416'
+require 'securerandom'
+
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    # Use the existing token.
+    File.read(token_file).chomp
+  else
+    # Generate a new token and store it in token_file.
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+
+Progress::Application.config.secret_key_base = secure_token
