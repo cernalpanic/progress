@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  require 'ISBNdb'
 
   # GET /books
   # GET /books.json
@@ -24,8 +25,14 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-    @book = Book.new(book_params)
-
+    results = ISBNdb::Query.find_book_by_isbn("1934356735")
+    result = results.first
+    require 'json'
+    Rails.logger.debug "tdh: " + JSON.pretty_generate(result)
+    @book = Book.new({:title => result.title, 
+                       :author => result.authors_text,
+                       :isbn => result.isbn,
+                       :title_long => result.title_long})
     respond_to do |format|
       if @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
