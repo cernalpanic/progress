@@ -25,7 +25,7 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-    results = ISBNdb::Query.find_book_by_isbn("1934356735")
+    results = ISBNdb::Query.find_book_by_isbn(book_params[:isbn])
     result = results.first
     require 'json'
     Rails.logger.debug "tdh: " + JSON.pretty_generate(result)
