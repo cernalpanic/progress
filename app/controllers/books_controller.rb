@@ -28,7 +28,7 @@ class BooksController < ApplicationController
     results = ISBNdb::Query.find_book_by_isbn(book_params[:isbn])
     result = results.first
     require 'json'
-    Rails.logger.debug "tdh: " + JSON.pretty_generate(result)
+    Rails.logger.debug "tdh: " << JSON.pretty_generate(result)
     @book = Book.new({:title => result.title, 
                        :author => result.authors_text,
                        :isbn => result.isbn,
