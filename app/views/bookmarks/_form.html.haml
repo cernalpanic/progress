@@ -1,0 +1,39 @@
+= form_for(@bookmark) do |f|
+  - if @bookmark.errors.any?
+    %div#error_explanation
+      %h2- pluralize(@bookmark.errors.count, "error") prohibited this bookmark from being saved:
+
+      %ul
+        - @bookmark.errors.full_messages.each do |msg|
+          %li= msg
+  = collection_select(:bookmark, :book_id, Book.all, :id, :generate_title, prompt: true)
+  %div.field
+    = f.label :chapters_total
+    %br
+    = f.text_field :chapters_total
+  %div.field
+    = f.label :chapters_completed
+    %br
+    = f.text_field :chapters_completed
+  %dif.field
+    = f.label :notes
+    %br
+    = f.text_field :notes
+  %div.field
+    = f.label :url
+    %br
+    = f.text_field :url
+  %div.field
+    = f.label :title
+    %br
+    = f.text_field :title
+  %div.field
+    = f.label :page_number
+    %br
+    = f.text_field :page_number
+  %div.field
+    = f.label :git_repo
+    %br
+    = f.text_field :git_repo
+  %div.actions
+    = f.submit :class => 'btn'

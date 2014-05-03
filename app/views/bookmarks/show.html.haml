@@ -1,0 +1,36 @@
+%p#notice= notice
+
+%p
+  %strong Book
+  = Book.find(@bookmark.book_id).title
+
+%p
+  %strong>Chapters total:
+  = @bookmark.chapters_total
+
+%p
+  %strong>Chapters completed:
+  = @bookmark.chapters_completed
+
+%p
+  %strong>Notes:
+  = @bookmark.notes
+
+%p
+  %strong>Url:
+  = @bookmark.url
+
+%p
+  %strong>Title:
+  = @bookmark.title
+
+%p
+  %strong>Page number:
+  = @bookmark.page_number
+
+%p
+  %strong>Git repo:
+  = @bookmark.git_repo
+
+= link_to 'Edit', edit_bookmark_path(@bookmark) |
+= link_to 'Back', bookmarks_path
