@@ -1,28 +1,34 @@
-== README
+== PROGRESS
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+PROGRESS is a Rails app that allows a dev to track their progress through software books.
 
-Things you may want to cover:
+It will hopefully take away some of the pain of leaving a book after a couple of chapters and then trying to come back weeks later.
+
+1. http://tdh-progress.herokuapp.com/books //add books here
+2. http://tdh-progress.herokuapp.com/bookmarks //add bookmarks here
 
 * Ruby version
+ruby 2.0.0p353
 
 * System dependencies
+nothing crazy, the isbndb gem
 
 * Configuration
+1. clone the repo
+2. run 'bundle install'
+3. create a db and development adapter
+4. ??? 
 
 * Database creation
+The db runs on postgres so you'll want to make a development adapter for sqlite (or whatever)
 
 * Database initialization
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
 * Deployment instructions
+I'll deploy to heroku off of the master branch
 
-* ...
+* To contribute
+1. create a branch and name it after your feature/bug fix
+2. push it up and make a pull request.
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
