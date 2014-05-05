@@ -6,11 +6,20 @@
   = javascript_include_tag "application", "data-turbolinks-track" => true
   = csrf_meta_tags
 
+- if user_signed_in?
+  Logged in as 
+  = current_user.email
+  = link_to 'Edit profile', edit_user_registration_path |
+  = link_to "Logout", destroy_user_session_path, method: :delete
+- else
+  = link_to "Sign up", new_user_registration_path |
+  = link_to "Login", new_user_session_path 
+
 %ul.nav.nav-tabs
   %li 
-    %a{ :href=> "books" } Books
+    %a{ :href=> "/books" } Books
   %li 
-    %a{ :href=> "bookmarks" } Bookmarks
+    %a{ :href=> "/bookmarks" } Bookmarks
 
 = yield
 
