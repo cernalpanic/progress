@@ -6,6 +6,11 @@
   = javascript_include_tag "application", "data-turbolinks-track" => true
   = csrf_meta_tags
 
+- if flash.notice || flash.alert
+  %p.notice= flash.notice
+  %p.alert= flash.alert
+
+
 - if user_signed_in?
   Logged in as 
   = current_user.email
