@@ -1,5 +1,9 @@
 %h3 New book
 
+- if @results_error
+	%h4{:class => "error_text"}
+		= @results_error
+		
 = render 'form'
 
 = link_to 'Back', books_path

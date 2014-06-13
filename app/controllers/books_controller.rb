@@ -27,20 +27,26 @@ class BooksController < ApplicationController
   # POST /books.json
   def create
     results = ISBNdb::Query.find_book_by_isbn(book_params[:isbn])
-    result = results.first
-    require 'json'
-    Rails.logger.debug "tdh: " << JSON.pretty_generate(result)
-    @book = Book.new({:title => result.title, 
-                       :author => result.authors_text,
-                       :isbn => result.isbn,
-                       :title_long => result.title_long})
-    respond_to do |format|
-      if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @book }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
+    if results.first == nil #handles the case when ISBNdb::Query return an emtpy result
+      @book = Book.new(book_params)
+      @results_error = "This ISBN number did not return a result.  Please try again."
+      render 'new'
+    else
+      result = results.first
+      require 'json'
+      Rails.logger.debug "tdh: " << JSON.pretty_generate(result)
+      @book = Book.new({:title => result.title, 
+                        :author => result.authors_text,
+                        :isbn => result.isbn,
+                        :title_long => result.title_long})
+      respond_to do |format|
+       if @book.save
+          format.html { redirect_to @book, notice: 'Book was successfully created.' }
+          format.json { render action: 'show', status: :created, location: @book }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @book.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
